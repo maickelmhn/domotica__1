@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Presentación - Maickel Herrera</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1220;
+  --card:#0f1b27;
+  --muted:#9fb3c8;
+  --accent:#39d0ff;
+  --glass: rgba(255,255,255,0.03);
+  --radius:14px;
+  --maxw:1100px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: linear-gradient(180deg,#06111a 0%, #071826 100%);
+  color:#e6f6ff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+}
+
+/* container */
+.page{
+  max-width:var(--maxw);
+  margin:28px auto;
+  padding:22px;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:16px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 48px);
+  max-width:var(--maxw);
+  background:linear-gradient(180deg, rgba(10,20,30,0.86), rgba(6,12,18,0.6));
+  border-radius:12px;
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  z-index:999;
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.03);
+}
+.brand{display:flex; align-items:center; gap:12px}
+.logo{width:46px; height:46px; border-radius:10px; background:linear-gradient(135deg,var(--accent), #67f0ff); color:#002; display:flex; align-items:center; justify-content:center; font-weight:800; font-family:monospace}
+.brand h1{margin:0; font-size:16px; color:#eaffff}
+.brand p{margin:0; font-size:12px; color:var(--muted)}
+.nav-links{display:flex; gap:12px; align-items:center}
+.nav-links a{color:var(--muted); text-decoration:none; font-weight:600; font-size:14px; padding:8px 10px; border-radius:8px; transition:all .18s ease}
+.nav-links a:hover{color:#002; background:var(--accent); transform:translateY(-3px); box-shadow:0 10px 30px rgba(57,208,255,0.06)}
+
+/* HERO */
+.hero{
+  margin:110px auto 26px;
+  max-width:var(--maxw);
+  padding:36px;
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.02);
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:24px;
+  align-items:center;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+.hero-left h2{margin:0; font-size:30px; color:var(--accent)}
+.hero-left p{color:#cfeff9; margin-top:8px}
+.cta-row{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap}
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--accent);
+  color:#002;
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 10px 30px rgba(57,208,255,0.06);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.btn.secondary{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04)}
+.btn:hover{transform:translateY(-4px); box-shadow:0 20px 40px rgba(57,208,255,0.12)}
+.hero-right{padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border:1px solid rgba(255,255,255,0.02)}
+.kv{font-size:13px; color:var(--muted); margin-bottom:8px}
+.kv strong{color:#fff}
+
+/* sections */
+.container{max-width:var(--maxw); margin:30px auto; padding:0 18px}
+.section{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); padding:22px; border-radius:12px; margin-bottom:18px; border:1px solid rgba(255,255,255,0.02); box-shadow:0 12px 40px rgba(0,0,0,0.45); opacity:0; transform:translateY(18px); transition:all .7s cubic-bezier(.2,.9,.2,1)}
+.section.visible{opacity:1; transform:translateY(0)}
+.section h3{margin:0 0 10px 0; color:var(--accent); font-size:18px}
+.section p{margin:0 0 8px 0; color:#dff8ff}
+
+/* grid & cards */
+.grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:14px; margin-top:12px}
+.card{padding:14px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); border:1px solid rgba(255,255,255,0.02); transition:transform .28s ease}
+.card:hover{transform:translateY(-8px); box-shadow:0 18px 60px rgba(2,10,20,0.6)}
+.card h4{margin:0 0 8px 0; color:#fff}
+.muted{color:var(--muted)}
+
+/* timeline */
+.timeline{position:relative; padding-left:28px; border-left:3px dashed rgba(255,255,255,0.03)}
+.time-item{position:relative; margin-bottom:20px; padding-left:18px}
+.time-item::before{content:''; position:absolute; left:-37px; top:2px; width:14px; height:14px; border-radius:50%; background:var(--accent); box-shadow:0 8px 22px rgba(57,208,255,0.08)}
+.time-item small{display:block;color:var(--muted); font-size:13px; margin-bottom:6px}
+.time-item p{margin:0; color:#d7f7ff}
+
+/* contact */
+.contact-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+/* footer */
+footer{margin:34px auto 80px; text-align:center; color:var(--muted)}
+.footer-small{font-size:13px; margin-top:8px}
+
+/* responsive */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr; padding:20px}
+  nav{left:0; transform:none; width:100%; border-radius:0; padding:8px 14px}
+  .nav-links{display:none}
+}
+@media (max-width:560px){
+  .hero-left h2{font-size:24px}
+  .logo{width:44px;height:44px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <div class="logo">MH</div>
+    <div>
+      <h1>Maickel Herrera</h1>
+      <p>Domótica • Software • Reparación de computadores</p>
+    </div>
+  </div>
+  <div class="nav-links" id="navlinks">
+    <a href="#presentacion">Presentación</a>
+    <a href="#estudio">Qué estudio</a>
+    <a href="#disfruto">Lo que disfruto</a>
+    <a href="#hago">Lo que sé hacer</a>
+    <a href="#visualizar">Cómo visualizarlo</a>
+    <a href="#habilidades">Habilidades</a>
+    <a href="#vision">Mi visión</a>
+    
+  </div>
+</nav>
+
+<div class="page">
+  <section class="hero" aria-label="Presentación">
+    <div class="hero-left">
+      <h2>Presentación Profesional</h2>
+      <p>Soy <strong>Maickel Herrera</strong>, una persona apasionada por la tecnología, el diseño inteligente y la creación de soluciones que hagan la vida más práctica y moderna. Me considero curioso, responsable y con una gran motivación por aprender constantemente. Me gusta analizar, crear y mejorar todo aquello que pueda convertirse en algo más eficiente o inteligente.</p>
+      <div class="cta-row">
+        
+        <a class="btn secondary" href="#habilidades">Ver habilidades</a>
+      </div>
+    </div>
+
+    <aside class="hero-right" aria-label="Datos rápidos">
+      <div class="kv"><strong>Rol:</strong> Tecnólogo en Desarrollo de Software</div>
+      <div class="kv"><strong>Estudios:</strong> Ingeniería de Sistemas (estudiante)</div>
+      <div class="kv"><strong>Enfoque:</strong> Domótica, IoT y reparación de computadores</div>
+      <div style="height:12px"></div>
+      <div style="background:linear-gradient(90deg, rgba(57,208,255,0.06), rgba(255,255,255,0.01)); padding:12px; border-radius:10px">
+        <div style="font-size:13px;color:var(--muted)">Disponible para:</div>
+        <div style="font-weight:800;color:#fff;margin-top:6px">Proyectos domóticos y servicio técnico de computadores</div>
+      </div>
+    </aside>
+  </section>
+
+  <main class="container">
+
+    <article id="presentacion" class="section visible">
+      <h3>QUIÉN SOY</h3>
+      <p>Soy Maickel Herrera, una persona apasionada por la tecnología, los sistemas inteligentes y el diseño de espacios modernos automatizados. Me encanta transformar ideas en soluciones reales que hagan los hogares más funcionales, seguros y eficientes. Soy curioso, responsable y siempre estoy buscando cómo mejorar un proceso, un dispositivo o un entorno mediante la domótica y la tecnología conectada.</p>
+      <p>Además, aplico esta misma mentalidad a mi proyecto de negocio, donde me dedico a comprar computadores de segunda, repararlos, mejorarlos y ponerlos nuevamente en funcionamiento para revenderlos a un precio accesible, ofreciendo equipos confiables y listos para trabajar. Este emprendimiento me permite unir mis conocimientos en hardware, servicio técnico y automatización, brindando soluciones tecnológicas reales para las personas.</p>
+    </article>
+
+    <article id="estudio" class="section">
+      <h3>QUÉ ESTUDIO</h3>
+      <p>Actualmente soy Tecnólogo en Desarrollo de Software y estudiante de Ingeniería de Sistemas, una formación que me permite unir mis dos pasiones: la tecnología y la innovación aplicada a la automatización inteligente.</p>
+      <p>Además, estoy desarrollando competencias en áreas clave como:</p>
+      <ul class="muted">
+        <li>Desarrollo de software y programación</li>
+        <li>Domótica y automatización residencial</li>
+        <li>Redes, IoT y sistemas inteligentes</li>
+        <li>Integración de dispositivos smart</li>
+        <li>Diseño y estructura de sistemas tecnológicos</li>
+        <li>Ecosistemas de asistentes virtuales (Alexa, Google Home, etc.)</li>
+      </ul>
+      <p>Estas áreas me dan las bases para crear proyectos modernos, funcionales y orientados al futuro del hogar digital, pero también fortalecen mi capacidad para diagnosticar, reparar y optimizar computadores en mi emprendimiento, asegurando que cada equipo funcione con calidad y rendimiento.</p>
+    </article>
+
+    <article id="disfruto" class="section">
+      <h3>LO QUE DISFRUTO</h3>
+      <p>Disfruto:</p>
+      <ul class="muted">
+        <li>Explorar nuevos dispositivos inteligentes y entender cómo funcionan.</li>
+        <li>Diseñar cómo se vería un espacio moderno, seguro y automatizado.</li>
+        <li>Aprender sobre sensores, cámaras, sistemas de iluminación smart y control por voz.</li>
+        <li>Resolver problemas técnicos y optimizar sistemas para que funcionen mejor.</li>
+        <li>Pensar nuevas ideas, organizar proyectos y mejorar mis habilidades cada día.</li>
+      </ul>
+      <p>también disfruto:</p>
+      <ul class="muted">
+        <li>mantenimiento de computadores y diagnosticar fallas.</li>
+        <li>actualizar y optimizar equipos para que funcionen como nuevos.</li>
+        <li>Montar instalaciones completas que combinen computación con sistemas inteligentes.</li>
+        </ul>
+    </article>
+
+    <article id="hago" class="section">
+      <h3>LO QUE SÉ HACER</h3>
+      <p>Tengo habilidades  en el área de la domótica y automatización residencial. Sé identificar las necesidades del hogar para implementar sistemas inteligentes que mejoren la comodidad, seguridad y eficiencia energética. Manejo conceptos de sensores, actuadores, cámaras inteligentes, automatización por voz y control remoto a través de aplicaciones móviles.</p>
+      <p>Además, tengo la capacidad de planificar y organizar la integración de dispositivos como iluminación smart, cerraduras electrónicas, cámaras de seguridad, asistentes virtuales, interruptores inteligentes, entre otros. Me adapto con rapidez a nuevas tecnologías y comprendo cómo se comunican los dispositivos dentro de un ecosistema domótico.</p>
+      <p>En el aspecto del negocio tecnológico también sé hacer:</p>
+      <ul class="muted">
+        <li>Reparación y mantenimiento de computadores</li>
+        <li>Diagnóstico de fallas</li>
+        <li>Actualización de componentes (RAM, discos, sistemas operativos, etc.)</li>
+        <li>Reinicio, limpieza y optimización de software</li>
+        <li>Preparación de equipos listos para la venta</li>
+        <li>Atención a clientes que buscan soluciones económicas y confiables</li>
+      </ul>
+      <p>Esto me permite ofrecer un servicio completo, desde un computador funcional hasta su integración con sistemas domóticos si el cliente lo necesita.</p>
+    </article>
+
+    <article id="habilidades" class="section">
+      <h3>HABILIDADES (Relacionadas con la domótica)</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Habilidades Técnicas (Hard Skills)</h4>
+          <ul class="muted">
+            <li>Manejo de herramientas tecnológicas y plataformas smart.</li>
+            <li>Integración básica de dispositivos inteligentes (sensores, cámaras, luces, etc.).</li>
+            <li>Conocimientos en redes, IoT y conectividad entre dispositivos.</li>
+            <li>Diseño de interfaces sencillas para control domótico.</li>
+            <li>Bases de programación aplicada a automatización.</li>
+            <li>Capacidad para aprender rápidamente nuevas tecnologías.</li>
+            <li> mantenimiento y optimización de computadores.</li>
+            <li>Configuración de software para clientes y equipos funcionales.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Habilidades Blandas (Soft Skills)</h4>
+          <ul class="muted">
+            <li>Comunicación clara y efectiva para explicar soluciones tecnológicas.</li>
+            <li>Trabajo en equipo para integrar software, hardware y diseño.</li>
+            <li>Adaptabilidad ante nuevas tecnologías y cambios constantes.</li>
+            <li>Creatividad para resolver problemas técnicos de automatización.</li>
+            <li>Pensamiento crítico y analítico para evaluar sistemas inteligentes.</li>
+            <li>Organización y gestión del tiempo para manejar proyectos e inventario del negocio.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+     <article id="visualizar" class="section">
+      <h3>CÓMO PUEDO VISUALIZARLO PARA LOGRARLO</h3>
+      <div class="timeline">
+        <div class="time-item">
+          <small>Corto Plazo </small>
+          <p>Fortalecer conocimientos en domótica aplicada a hogares y negocios; realizar instalaciones reales de cámaras, redes y equipos; crear registro visual de mis proyectos para portafolio.</p>
+        </div>
+        <div class="time-item">
+          <small>Mediano Plazo </small>
+          <p>Ofrecer servicios completos al cliente: análisis, instalación y soporte; integrar varios sistemas simultáneos; diseñar mi propia marca y presencia profesional.</p>
+        </div>
+        <div class="time-item">
+          <small>Largo Plazo </small>
+          <p>Construir un negocio sólido especializado en domótica y computación; ser reconocido por soluciones seguras, modernas y eficientes; implementar automatizaciones avanzadas conectadas a software propio.</p>
+        </div>
+      </div>
+    </article>
+
+    <article id="vision" class="section">
+      <h3>MI VISIÓN</h3
+      ><p>Convertirme en un profesional capaz de ofrecer soluciones tecnológicas reales que ayuden a transformar hogares y negocios mediante:
+
+       </p>• Seguridad
+       </p>• Automatización
+       </p>• Comodidad
+       </p>• Control total desde cualquier lugar
+       </p>• Equipos confiables y configuraciones profesionales
+
+      <p>Este es el camino que estoy construyendo con dedicación cada día..</p>
+    </article>
+
+   
+  
+
+  </main>
+
+  <footer>
+    © 2025 — Maickel Herrera • Domótica & Computación
+    <div class="footer-small">Diseño, instalación, reparación y venta de equipos — soluciones reales y asequibles</div>
+  </footer>
+</div>
+
+<script>
+// Reveal on scroll
+const sections = document.querySelectorAll('.section');
+const reveal = () => {
+  const trigger = window.innerHeight * 0.85;
+  sections.forEach(s => {
+    const top = s.getBoundingClientRect().top;
+    if(top < trigger) s.classList.add('visible');
+  });
+};
+window.addEventListener('scroll', reveal);
+window.addEventListener('load', reveal);
+
+// Smooth nav anchor with offset
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', function(e){
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({top, behavior:'smooth'});
+    }
+  });
+});
+</script>
+
+</body>
+</html>
